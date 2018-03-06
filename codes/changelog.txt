@@ -1,0 +1,9 @@
+Version 1
+- change the out_grads of `backward` function of `ReLU` layer into inputs_grads instead of in_grads
+
+Version 2
+- correct the `__init__` function of `Convolution` layer in the pdf file (used to be the one of `FCLayer`);
+- clarify the meaning of `pad` of `Convolution` layer in the pdf file (same in `Pooling`);
+- remove `bias_correction` in the comments of `Adam` in optimizers.py (no need to implement it);
+- correct the implementation of `RMSprop`optimizers.py (change the calculation of `self.accumulators` into this one: self.accumulators[k] = self.rho * self.accumulators[k] + (1 - self.rho) * xs_grads[k]**2)
+

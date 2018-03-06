@@ -1,0 +1,1327 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CS5242\_Assignment\_1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Introduction}\label{introduction}
+
+\textbf{ASSIGNMENT DEADLINE: 4 MAR 2018 (SUN) 17:00PM}
+
+In this assignment we will be coding the building blocks for the
+convolutional neural network and putting them together to train a CNN on
+the MNIST dataset.
+
+\textbf{Attention: Only python3 will be allowed to use in this
+assignment. And we use \texttt{numpy} to store and caculate data and
+parameters. You do not need a GPU to for this assignment. CPU is enough.
+To run this Jupyter notebook, you need to install the depedent libraries
+in \href{requirements.txt}{requiremets.txt} via pip (or pip3). Note:
+keras version should be \textgreater{}=2.1.2. Please do not run this
+whole file before you implement all the codes. Otherwise it will occur
+some error.}
+
+For each layer we will implement a forward and a backward function. The
+forward function will receive inputs and will return the outputs of this
+layer(loss layer will be a little different), like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ forward(}\VariableTok{self}\NormalTok{, inputs):}
+  \CommentTok{""" Receive inputs and return output"""}
+  \CommentTok{# Do some computations ...}
+\NormalTok{  z }\OperatorTok{=} \CommentTok{# ... some intermediate value}
+  \CommentTok{# Do some more computations ...}
+\NormalTok{  outputs }\OperatorTok{=} \CommentTok{# the outputs}
+    
+  \ControlFlowTok{return}\NormalTok{ outputs}
+\end{Highlighting}
+\end{Shaded}
+
+The backward pass will receive upstream derivatives and inputs, and will
+return gradients with respect to the inputs. Gradients for weights or
+bias will be stored in parameters in this layer , like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ backward(}\VariableTok{self}\NormalTok{, in_grads, inputs):}
+  \CommentTok{"""}
+\CommentTok{  Receive derivative of loss with respect to outputs,}
+\CommentTok{  and compute derivative with respect to inputs.}
+\CommentTok{  """}
+  \CommentTok{# Use values in cache to compute derivatives}
+\NormalTok{  out_grads }\OperatorTok{=} \CommentTok{# Derivative of loss with respect to inputs}
+  \VariableTok{self}\NormalTok{.w_grad }\OperatorTok{=} \CommentTok{# Derivative of loss with respect to self.weights}
+  \VariableTok{self}\NormalTok{.b_grad }\OperatorTok{=} \CommentTok{# Derivative of loss with respect to self.bias}
+    
+  \ControlFlowTok{return}\NormalTok{ out_grads}
+\end{Highlighting}
+\end{Shaded}
+
+After implementing a bunch of layers this way, we will be able to easily
+combine them to build classifiers with different architectures.
+
+This iPython notebook serves to:
+
+\begin{itemize}
+\tightlist
+\item
+  explain the questions
+\item
+  explain the function APIs and implementation examples (like
+  \texttt{ReLU})
+\item
+  provide helper functions to piece functions together and check your
+  code
+\end{itemize}
+
+    \section{ReLU layer}\label{relu-layer}
+
+A convolution layer is usually followed by a non-linear activation
+function. We will provide the functions \texttt{forward} and
+\texttt{backward} of class \texttt{ReLU} in \texttt{layers.py} as an
+implementation example. Read through the function code and make sure you
+understand the derivation. Besides, we will explain the implementation
+of \texttt{ReLU} after \texttt{Convolution} using formula. You need to
+write down other layers' formulations in your reports.
+
+\subsection{Forward Formulation}\label{forward-formulation}
+
+Given input \(x \in R^{B \times C \times H \times W}\) (\(B\):batch
+size, \(C\): number of channel, \(H\): input height, \(W\): input
+width), output \(y \in R^{B \times C \times H \times W}\) will be
+caculated like this:
+
+\begin{equation*}
+y=indicator(x) \times x
+\end{equation*}
+
+Here, \(indicator(x)\) return the same size of input \(x\), comparing
+\(x\) with 0 element-wisely. If \(x_{i,j,k,l} \geq 0\) return
+\(z_{i,j,k,l}=1\). And the multiplication is also element-wise. If the
+input \(x\) has only 2 dimensions, i.e. the batch dimension and the
+feature dimension, e.g. after the FC layer, the subscripts \(j,k,l\) in
+the formula are merged into one \(j\).
+
+\subsection{Backward Formulation}\label{backward-formulation}
+
+Given input \(x \in R^{B \times C \times H \times W}\) (\(B\):batch
+size, \(C\): number of channel, \(H\): input height, \(W\): input width)
+and gradients to output of this layer
+\(dy \in R^{B \times C \times H \times W}\), gradients to input \(dx\)
+will be caculated like this:
+
+\begin{equation*}
+dx=indicator(x) \times dy
+\end{equation*}
+
+    \section{Covolution Layer}\label{covolution-layer}
+
+In the file \texttt{layers.py}, the class \texttt{Convolution} will be
+initialized with \texttt{conv\_params}, \texttt{initializer} and
+\texttt{name}, shown as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, conv_params, initializer}\OperatorTok{=}\NormalTok{Guassian(), name}\OperatorTok{=}\StringTok{'conv'}\NormalTok{):}
+        \BuiltInTok{super}\NormalTok{(Convolution, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{(name}\OperatorTok{=}\NormalTok{name)}
+        \VariableTok{self}\NormalTok{.trainable }\OperatorTok{=} \VariableTok{True}
+        \VariableTok{self}\NormalTok{.kernel_h }\OperatorTok{=}\NormalTok{ conv_params[}\StringTok{'kernel_h'}\NormalTok{] }\CommentTok{# height of kernel}
+        \VariableTok{self}\NormalTok{.kernel_w }\OperatorTok{=}\NormalTok{ conv_params[}\StringTok{'kernel_w'}\NormalTok{] }\CommentTok{# width of kernel}
+        \VariableTok{self}\NormalTok{.pad }\OperatorTok{=}\NormalTok{ conv_params[}\StringTok{'pad'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.stride }\OperatorTok{=}\NormalTok{ conv_params[}\StringTok{'stride'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.in_channel }\OperatorTok{=}\NormalTok{ conv_params[}\StringTok{'in_channel'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.out_channel }\OperatorTok{=}\NormalTok{ conv_params[}\StringTok{'out_channel'}\NormalTok{]}
+
+        \VariableTok{self}\NormalTok{.weights }\OperatorTok{=}\NormalTok{ initializer.initialize((}\VariableTok{self}\NormalTok{.out_channel, }\VariableTok{self}\NormalTok{.in_channel, }\VariableTok{self}\NormalTok{.kernel_h, }\VariableTok{self}\NormalTok{.kernel_w))}
+        \VariableTok{self}\NormalTok{.bias }\OperatorTok{=}\NormalTok{ np.zeros((}\VariableTok{self}\NormalTok{.out_channel))}
+
+        \VariableTok{self}\NormalTok{.w_grad }\OperatorTok{=}\NormalTok{ np.zeros(}\VariableTok{self}\NormalTok{.weights.shape)}
+        \VariableTok{self}\NormalTok{.b_grad }\OperatorTok{=}\NormalTok{ np.zeros(}\VariableTok{self}\NormalTok{.bias.shape)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{conv\_params} is a dictionary, containing these parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  'kernel\_h': The height of kernel.
+\item
+  'kernel\_w': The width of kernel.
+\item
+  'stride': The number of pixels between adjacent receptive fields in
+  the horizontal and vertical directions.
+\item
+  'pad': The number of pixels padded to the bottom, top, left and right
+  of each feature map. \textbf{Here, \texttt{pad=2} means a 2-pixel
+  border of padded with zeros. So the total number of zeros for
+  horizontal (or vertical) direction is 2*pad=4}.
+\item
+  'in\_channel': The number of input channels.
+\item
+  'out\_channel': The number of output channels.
+\end{itemize}
+
+\texttt{initializer} is an instance of Initializer class (leave it out
+right now)
+
+    \subsection{Forward}\label{forward}
+
+In the file \texttt{layers.py}, implement the forward pass for a
+convolutional layer in the function \texttt{forward} of class
+\texttt{Convolution}.
+
+The input consists of N data points, each with C channels, height H and
+width W. We convolve each input with K different kernels, where each
+filter spans all C channels and has height HH and width WW.
+
+Input:
+
+\begin{itemize}
+\tightlist
+\item
+  inputs: Input data of shape (N, C, H, W)
+\end{itemize}
+
+\textbf{WARNING:} Please implement the matrix product method of
+convolution as shown in Lecture notes. The naive version of implementing
+a sliding window will be too slow when you try to train the whole CNN in
+later sections.
+
+You can test your implementation by restarting jupyter notebook kernel
+and running the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{layers} \PY{k}{import} \PY{n}{Convolution}
+        \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{rel\PYZus{}error}
+        
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{models}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}\PY{p}{)}
+        \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{64}\PY{p}{,}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{layer} \PY{o}{=} \PY{n}{Convolution}\PY{p}{(}\PY{n}{params}\PY{p}{)}
+        \PY{n}{out} \PY{o}{=} \PY{n}{layer}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+        
+        \PY{n}{keras\PYZus{}model} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{keras\PYZus{}layer} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                    \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                    \PY{n}{strides}\PY{o}{=}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                    \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{n}{data\PYZus{}format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{channels\PYZus{}first}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{keras\PYZus{}layer}\PY{p}{)}
+        \PY{n}{sgd} \PY{o}{=} \PY{n}{optimizers}\PY{o}{.}\PY{n}{SGD}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+        \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}squared\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sgd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{weights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{layer}\PY{o}{.}\PY{n}{weights}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+        \PY{n}{keras\PYZus{}layer}\PY{o}{.}\PY{n}{set\PYZus{}weights}\PY{p}{(}\PY{p}{[}\PY{n}{weights}\PY{p}{,} \PY{n}{layer}\PY{o}{.}\PY{n}{bias}\PY{p}{]}\PY{p}{)}
+        \PY{n}{keras\PYZus{}out} \PY{o}{=} \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative error (\PYZlt{}1e\PYZhy{}6 will be fine): }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rel\PYZus{}error}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{keras\PYZus{}out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/zero/anaconda3/envs/tensorflow/lib/python3.6/site-packages/h5py/\_\_init\_\_.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from .\_conv import register\_converters as \_register\_converters
+Using TensorFlow backend.
+/home/zero/anaconda3/envs/tensorflow/lib/python3.6/importlib/\_bootstrap.py:219: RuntimeWarning: compiletime version 3.5 of module 'tensorflow.python.framework.fast\_tensor\_util' does not match runtime version 3.6
+  return f(*args, **kwds)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Relative error (<1e-6 will be fine):  3.990660772975816e-07
+
+    \end{Verbatim}
+
+    \subsection{Backward}\label{backward}
+
+Implement the backward pass for the convolution operation in the
+function \texttt{backward} of \texttt{Convolution} class in the file
+\texttt{layers.py}.
+
+When you are done, restart jupyter notebook and run the following to
+check your backward pass with a numeric gradient check.
+
+In gradient checking, to get an approximate gradient for a parameter, we
+vary that parameter by a small amount (while keeping rest of parameters
+constant) and note the difference in the network loss. Dividing the
+difference in network loss by the amount we varied the parameter gives
+us an approximation for the gradient. We repeat this process for all the
+other parameters to obtain our numerical gradient. Note that gradient
+checking is a slow process (2 forward propagations per parameter) and
+should only be used to check your backpropagation!
+
+More links on gradient checking:
+
+http://ufldl.stanford.edu/tutorial/supervised/DebuggingGradientChecking/
+
+https://www.coursera.org/learn/machine-learning/lecture/Y3s6r/gradient-checking
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{layers} \PY{k}{import} \PY{n}{Convolution}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{check\PYZus{}grads} \PY{k}{import} \PY{n}{check\PYZus{}grads\PYZus{}layer}
+        
+        \PY{n}{batch} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{conv\PYZus{}params}\PY{o}{=}\PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{in\PYZus{}height} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{in\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{20}
+        \PY{n}{out\PYZus{}height} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{n}{in\PYZus{}height}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{out\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{n}{in\PYZus{}width}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel\PYZus{}w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{batch}\PY{p}{,} \PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{in\PYZus{}height}\PY{p}{,} \PY{n}{in\PYZus{}width}\PY{p}{)}\PY{p}{)}
+        \PY{n}{in\PYZus{}grads} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{batch}\PY{p}{,} \PY{n}{conv\PYZus{}params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}channel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{out\PYZus{}height}\PY{p}{,} \PY{n}{out\PYZus{}width}\PY{p}{)}\PY{p}{)}
+        \PY{n}{conv} \PY{o}{=} \PY{n}{Convolution}\PY{p}{(}\PY{n}{conv\PYZus{}params}\PY{p}{)}
+        \PY{n}{check\PYZus{}grads\PYZus{}layer}\PY{p}{(}\PY{n}{conv}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{in\PYZus{}grads}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<1e-8 will be fine
+Gradients to inputs: 1.4932430945544107e-11
+Gradients to weights:  5.64255171696083e-13
+Gradients to bias:  8.642318016673506e-13
+
+    \end{Verbatim}
+
+    \section{Dropout Layer}\label{dropout-layer}
+
+Dropout {[}1{]} is a technique for regularizing neural networks by
+randomly setting some features to zero during the forward pass. In this
+exercise you will implement a dropout layer and modify your
+fully-connected network to optionally use dropout.
+
+{[}1{]} Geoffrey E. Hinton et al, "Improving neural networks by
+preventing co-adaptation of feature detectors", arXiv 2012
+
+In the file \texttt{layers.py}, the class \texttt{FCLayer} will be
+initialized with \texttt{ratio}, \texttt{seed} and \texttt{name}, shown
+as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, ratio, name}\OperatorTok{=}\StringTok{'dropout'}\NormalTok{, seed}\OperatorTok{=}\VariableTok{None}\NormalTok{):}
+        \BuiltInTok{super}\NormalTok{(Dropout, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{(name}\OperatorTok{=}\NormalTok{name)}
+        \VariableTok{self}\NormalTok{.ratio }\OperatorTok{=}\NormalTok{ ratio}
+        \VariableTok{self}\NormalTok{.mask }\OperatorTok{=} \VariableTok{None}
+        \VariableTok{self}\NormalTok{.seed }\OperatorTok{=}\NormalTok{ seed}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{ratio}: The probability of setting a neuron to zero
+\item
+  \texttt{seed}: Random seed to sample from inputs, so as to get mask.
+  (default as None)
+\end{itemize}
+
+    \subsection{Forward}\label{forward}
+
+In the file \texttt{layers.py}, implement the forward pass for dropout.
+Since dropout behaves differently during training and testing, make sure
+to implement the operation for both modes. \texttt{p} refers to the
+probability of setting a neuron to zero. We will follow the Caffe
+convention where we multiply the outputs by \texttt{1/(1-p)} during
+training.
+
+    \subsection{Backward}\label{backward}
+
+In the file \texttt{layers.py}, implement the backward pass for dropout.
+After doing so, restart jupyter notebook and run the following cell to
+numerically gradient-check your implementation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dropout}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{check\PYZus{}grads} \PY{k}{import} \PY{n}{check\PYZus{}grads\PYZus{}layer}
+        
+        \PY{n}{ratio} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{20}
+        \PY{n}{channel} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1234}\PY{p}{)}
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{batch}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{)}
+        \PY{n}{in\PYZus{}grads} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{batch}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{)}
+        \PY{n}{dropout} \PY{o}{=} \PY{n}{Dropout}\PY{p}{(}\PY{n}{ratio}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{1234}\PY{p}{)}
+        \PY{n}{dropout}\PY{o}{.}\PY{n}{set\PYZus{}mode}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{check\PYZus{}grads\PYZus{}layer}\PY{p}{(}\PY{n}{dropout}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{in\PYZus{}grads}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<1e-8 will be fine
+Gradients to inputs: 3.977519800006909e-12
+
+    \end{Verbatim}
+
+    \section{Pooling Layer}\label{pooling-layer}
+
+In the file \texttt{layers.py}, the class \texttt{Pooling} will be
+initialized with \texttt{pool\_params}, and \texttt{name}, shown as
+below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, pool_params, name}\OperatorTok{=}\StringTok{'pooling'}\NormalTok{):}
+        \BuiltInTok{super}\NormalTok{(Pooling, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{(name}\OperatorTok{=}\NormalTok{name)}
+        \VariableTok{self}\NormalTok{.pool_type }\OperatorTok{=}\NormalTok{ pool_params[}\StringTok{'pool_type'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.pool_height }\OperatorTok{=}\NormalTok{ pool_params[}\StringTok{'pool_height'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.pool_width }\OperatorTok{=}\NormalTok{ pool_params[}\StringTok{'pool_width'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.stride }\OperatorTok{=}\NormalTok{ pool_params[}\StringTok{'stride'}\NormalTok{]}
+        \VariableTok{self}\NormalTok{.pad }\OperatorTok{=}\NormalTok{ pool_params[}\StringTok{'pad'}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{pool\_params} is a dictionary, containing these parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  'pool\_type': The type of pooling, 'max' or 'avg'
+\item
+  'pool\_h': The height of pooling kernel.
+\item
+  'pool\_w': The width of pooling kernel.
+\item
+  'stride': The number of pixels between adjacent receptive fields in
+  the horizontal and vertical directions.
+\item
+  'pad': The number of pixels that will be used to zero-pad the input in
+  each x-y direction. \textbf{Here, \texttt{pad=2} means a 2-pixel
+  border of padding with zeros}.
+\end{itemize}
+
+    \subsection{Forward}\label{forward}
+
+Implement the forward pass for the pooling operation in the function
+\texttt{forward} of class \texttt{Pooling} in the file
+\texttt{layers.py}.
+
+You can test your implementation by restarting jupyter notebook kernel
+and running the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{layers} \PY{k}{import} \PY{n}{Pooling}
+        \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{rel\PYZus{}error}
+        
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{models}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}\PY{p}{)}
+        \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pool\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pool\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pool\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{layer} \PY{o}{=} \PY{n}{Pooling}\PY{p}{(}\PY{n}{params}\PY{p}{)}
+        \PY{n}{out} \PY{o}{=} \PY{n}{layer}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+        
+        \PY{n}{keras\PYZus{}model} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{keras\PYZus{}layer} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pool\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pool\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                         \PY{n}{strides}\PY{o}{=}\PY{n}{params}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stride}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                         \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                         \PY{n}{data\PYZus{}format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{channels\PYZus{}first}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                         \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{keras\PYZus{}layer}\PY{p}{)}
+        \PY{n}{sgd} \PY{o}{=} \PY{n}{optimizers}\PY{o}{.}\PY{n}{SGD}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+        \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}squared\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sgd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{keras\PYZus{}out} \PY{o}{=} \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative error (\PYZlt{}1e\PYZhy{}6 will be fine): }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rel\PYZus{}error}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{keras\PYZus{}out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Relative error (<1e-6 will be fine):  7.61550641696389e-09
+
+    \end{Verbatim}
+
+    \subsection{Backward}\label{backward}
+
+Implement the backward pass for the max-pooling operation in the
+function \texttt{backward} of class \texttt{Pooling} in the file
+\texttt{layers.py}.
+
+Please make sure you have implemented both 'max' and 'avg' pooing in
+your codes. And then test the gradients by yourself.
+
+    \section{FC Layer}\label{fc-layer}
+
+FC layer (short for fully connected layer) is also called linear layer
+or dense layer.
+
+In the file \texttt{layers.py}, the class \texttt{FCLayer} will be
+initialized with \texttt{in\_features}, \texttt{out\_features}, and
+\texttt{name}, shown as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, in_features, out_features, name}\OperatorTok{=}\StringTok{'fclayer'}\NormalTok{, initializer}\OperatorTok{=}\NormalTok{Guassian()):}
+        \BuiltInTok{super}\NormalTok{(FCLayer, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{(name}\OperatorTok{=}\NormalTok{name)}
+        \VariableTok{self}\NormalTok{.trainable }\OperatorTok{=} \VariableTok{True}
+        \VariableTok{self}\NormalTok{.weights }\OperatorTok{=}\NormalTok{ initializer.initialize((in_features, out_features))}
+        \VariableTok{self}\NormalTok{.bias }\OperatorTok{=}\NormalTok{ initializer.initialize(out_features)}
+
+        \VariableTok{self}\NormalTok{.w_grad }\OperatorTok{=}\NormalTok{ np.zeros(}\VariableTok{self}\NormalTok{.weights.shape)}
+        \VariableTok{self}\NormalTok{.b_grad }\OperatorTok{=}\NormalTok{ np.zeros(}\VariableTok{self}\NormalTok{.bias.shape)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{in\_features}: The number of inputs features
+\item
+  \texttt{out\_features}: The numbet of required outputs features
+\end{itemize}
+
+    \subsection{Forward}\label{forward}
+
+Implement the forward pass for the pooling operation in the function
+\texttt{forward} of class \texttt{FCLayer} in the file
+\texttt{layers.py}.
+
+You can test your implementation by restarting jupyter notebook kernel
+and running the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{layers} \PY{k}{import} \PY{n}{FCLayer}
+        \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{rel\PYZus{}error}
+        
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{models}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{layer} \PY{o}{=} \PY{n}{FCLayer}\PY{p}{(}\PY{n}{in\PYZus{}features}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{out\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{out} \PY{o}{=} \PY{n}{layer}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+        
+        \PY{n}{keras\PYZus{}model} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{keras\PYZus{}layer} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{use\PYZus{}bias}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bias\PYZus{}initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zeros}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} print (len(keras\PYZus{}layer.get\PYZus{}weights()))}
+        \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{keras\PYZus{}layer}\PY{p}{)}
+        \PY{n}{sgd} \PY{o}{=} \PY{n}{optimizers}\PY{o}{.}\PY{n}{SGD}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+        \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}squared\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sgd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{keras\PYZus{}layer}\PY{o}{.}\PY{n}{set\PYZus{}weights}\PY{p}{(}\PY{p}{[}\PY{n}{layer}\PY{o}{.}\PY{n}{weights}\PY{p}{,} \PY{n}{layer}\PY{o}{.}\PY{n}{bias}\PY{p}{]}\PY{p}{)}
+        \PY{n}{keras\PYZus{}out} \PY{o}{=} \PY{n}{keras\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative error (\PYZlt{}1e\PYZhy{}6 will be fine): }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rel\PYZus{}error}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{keras\PYZus{}out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Relative error (<1e-6 will be fine):  1.9344922343073387e-07
+
+    \end{Verbatim}
+
+    \subsection{Backward}\label{backward}
+
+Implement the backward pass for the max-pooling operation in the
+function \texttt{backward} of class \texttt{FCLayer} in the file
+\texttt{layers.py}. Please test the gradients by yourself.
+
+    \section{SoftmaxCrossEntropy Loss}\label{softmaxcrossentropy-loss}
+
+We write Softmax and CrossEntropy together because it can avoid some
+numeric overflow problem.In the file \texttt{loss.py}, the class
+\texttt{SoftmaxCrossEntropy} will be initialized with
+\texttt{num\_class}, shown as below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, num_class):}
+        \BuiltInTok{super}\NormalTok{(SoftmaxCrossEntropy, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{()}
+        \VariableTok{self}\NormalTok{.num_class }\OperatorTok{=}\NormalTok{ num_class}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{num\_class}: The number of category
+
+    \subsection{Forward}\label{forward}
+
+Implement the forward pass for the pooling operation in the function
+\texttt{forward} of class \texttt{FCLayer} in the file
+\texttt{layers.py}.
+
+You can test your implementation by restarting jupyter notebook kernel
+and running the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{loss} \PY{k}{import} \PY{n}{SoftmaxCrossEntropy}
+        \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{rel\PYZus{}error}
+        
+        \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{models}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{batch} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{num\PYZus{}class} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{batch}\PY{p}{,} \PY{n}{num\PYZus{}class}\PY{p}{)}\PY{p}{)}
+        \PY{n}{targets} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{num\PYZus{}class}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{batch}\PY{p}{)}
+        
+        \PY{n}{loss} \PY{o}{=} \PY{n}{SoftmaxCrossEntropy}\PY{p}{(}\PY{n}{num\PYZus{}class}\PY{p}{)}
+        \PY{n}{out}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{targets}\PY{p}{)}
+        
+        \PY{n}{keras\PYZus{}inputs} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+        \PY{n}{keras\PYZus{}targets} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{inputs}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{batch}\PY{p}{)}\PY{p}{:}
+                \PY{n}{keras\PYZus{}targets}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{targets}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{keras\PYZus{}out} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{K}\PY{o}{.}\PY{n}{categorical\PYZus{}crossentropy}\PY{p}{(}\PY{n}{keras\PYZus{}targets}\PY{p}{,} \PY{n}{keras\PYZus{}inputs}\PY{p}{,} \PY{n}{from\PYZus{}logits}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative error (\PYZlt{}1e\PYZhy{}6 will be fine): }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rel\PYZus{}error}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n}{keras\PYZus{}out}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Relative error (<1e-6 will be fine):  9.377699188976416e-17
+
+    \end{Verbatim}
+
+    \subsection{Backward}\label{backward}
+
+In the file \texttt{loss.py}, implement the backward pass for
+\texttt{SodtmaxCrossEntropy}. Please test the gradients by yourself.
+
+    \section{Optimizer}\label{optimizer}
+
+In the file \texttt{optimizers.py}, there are 4 types of optimizer
+(\texttt{SGD}, \texttt{Adam}, \texttt{RMSprop} and \texttt{Adagrad}).
+You only need to implement the \texttt{update} function of
+\texttt{SGD}(mini-batch SGD with momentum) and \texttt{Adam}. These two
+types of optimizers are initialized like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{ SGD(Optimizer):}
+    \KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, lr}\OperatorTok{=}\FloatTok{0.01}\NormalTok{, momentum}\OperatorTok{=}\DecValTok{0}\NormalTok{, decay}\OperatorTok{=}\DecValTok{0}\NormalTok{, sheduler_func }\OperatorTok{=} \VariableTok{None}\NormalTok{):}
+        \BuiltInTok{super}\NormalTok{(SGD, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{(lr)}
+        \VariableTok{self}\NormalTok{.momentum }\OperatorTok{=}\NormalTok{ momentum}
+        \VariableTok{self}\NormalTok{.moments }\OperatorTok{=} \VariableTok{None}
+        \VariableTok{self}\NormalTok{.decay }\OperatorTok{=}\NormalTok{ decay}
+        \VariableTok{self}\NormalTok{.sheduler_func }\OperatorTok{=}\NormalTok{ sheduler_func}
+        
+\KeywordTok{class}\NormalTok{ Adam(Optimizer):}
+    \KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, lr}\OperatorTok{=}\FloatTok{0.001}\NormalTok{, beta_1}\OperatorTok{=}\FloatTok{0.9}\NormalTok{, beta_2}\OperatorTok{=}\FloatTok{0.999}\NormalTok{, epsilon}\OperatorTok{=}\VariableTok{None}\NormalTok{, decay}\OperatorTok{=}\DecValTok{0}\NormalTok{, sheduler_func}\OperatorTok{=}\VariableTok{None}\NormalTok{):}
+        \BuiltInTok{super}\NormalTok{(Adam, }\VariableTok{self}\NormalTok{).}\FunctionTok{__init__}\NormalTok{(lr)}
+        \VariableTok{self}\NormalTok{.beta_1 }\OperatorTok{=}\NormalTok{ beta_1}
+        \VariableTok{self}\NormalTok{.beta_2 }\OperatorTok{=}\NormalTok{ beta_2}
+        \VariableTok{self}\NormalTok{.epsilon }\OperatorTok{=}\NormalTok{ epsilon}
+        \VariableTok{self}\NormalTok{.decay }\OperatorTok{=}\NormalTok{ decay}
+        \ControlFlowTok{if} \KeywordTok{not} \VariableTok{self}\NormalTok{.epsilon:}
+            \VariableTok{self}\NormalTok{.epsilon }\OperatorTok{=} \FloatTok{1e-8}
+        \VariableTok{self}\NormalTok{.moments }\OperatorTok{=} \VariableTok{None}
+        \VariableTok{self}\NormalTok{.accumulators }\OperatorTok{=} \VariableTok{None}
+        \VariableTok{self}\NormalTok{.sheduler_func }\OperatorTok{=}\NormalTok{ sheduler_func}
+\end{Highlighting}
+\end{Shaded}
+
+For Both optimizers: - \texttt{lr}: The initial learning rate. -
+\texttt{decay}: The learning rate decay ratio - \texttt{sheduler\_func}:
+Function to change learning rate with respect to iterations
+
+For \texttt{SGD}: - \texttt{momentum}: The ratio of moments
+
+For \texttt{Adam}: More details can be seen in reference.
+
+\textbf{For you reference:}
+http://cs231n.github.io/neural-networks-3/\#update
+
+    \section{Train the net on full MNIST
+data}\label{train-the-net-on-full-mnist-data}
+
+By training the \texttt{MNISTNet} for one epoch, you should achieve
+about 90\% on the validation and test set. You may have to wait about 5
+minutes for training to be completed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{applications} \PY{k}{import} \PY{n}{MNISTNet}
+         \PY{k+kn}{from} \PY{n+nn}{loss} \PY{k}{import} \PY{n}{SoftmaxCrossEntropy}\PY{p}{,} \PY{n}{L2}
+         \PY{k+kn}{from} \PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{Adam}
+         \PY{k+kn}{from} \PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{datsets} \PY{k}{import} \PY{n}{MNIST}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{n}{mnist} \PY{o}{=} \PY{n}{MNIST}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mnist}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{p}{)}
+         \PY{n}{idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{num\PYZus{}train}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Four examples of training images:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{img} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{x\PYZus{}train}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+start download mnist dataset{\ldots}
+Number of training images:  48000
+Number of validation images:  12000
+Number of testing images:  10000
+
+Four examples of training images:
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} <matplotlib.image.AxesImage at 0x7f080c035438>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{model} \PY{o}{=} \PY{n}{MNISTNet}\PY{p}{(}\PY{p}{)}
+         \PY{n}{loss} \PY{o}{=} \PY{n}{SoftmaxCrossEntropy}\PY{p}{(}\PY{n}{num\PYZus{}class}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} define your learning rate sheduler}
+         \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{n}{iteration}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{iteration} \PY{o}{\PYZpc{}} \PY{l+m+mi}{1000} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{lr}\PY{o}{*}\PY{l+m+mf}{0.5}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{lr}
+         
+         \PY{n}{adam} \PY{o}{=} \PY{n}{Adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{decay}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}  \PY{n}{sheduler\PYZus{}func} \PY{o}{=} \PY{n}{func}\PY{p}{)}
+         \PY{n}{l2} \PY{o}{=} \PY{n}{L2}\PY{p}{(}\PY{n}{w}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)} \PY{c+c1}{\PYZsh{} L2 regularization with lambda=0.001}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{adam}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{n}{loss}\PY{p}{,} \PY{n}{regularization}\PY{o}{=}\PY{n}{l2}\PY{p}{)}
+         \PY{n}{train\PYZus{}results}\PY{p}{,} \PY{n}{val\PYZus{}results}\PY{p}{,} \PY{n}{test\PYZus{}results} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}
+             \PY{n}{mnist}\PY{p}{,} 
+             \PY{n}{train\PYZus{}batch}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{val\PYZus{}batch}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{test\PYZus{}batch}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} 
+             \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+             \PY{n}{val\PYZus{}intervals}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{test\PYZus{}intervals}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{print\PYZus{}intervals}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 0: 
+Test accuracy=0.11870, loss=2.30259
+Validation accuracy: 0.11708, loss: 2.30259
+Iteration 0:	accuracy=0.10000, loss=2.30259, regularization loss= 0.005269938172136857
+Validation accuracy: 0.51458, loss: 1.52543
+Iteration 100:	accuracy=0.40000, loss=1.59506, regularization loss= 0.03260591173363043
+Validation accuracy: 0.63808, loss: 1.09270
+Iteration 200:	accuracy=0.73333, loss=0.87318, regularization loss= 0.047275163161484376
+Test accuracy=0.71590, loss=0.86478
+Validation accuracy: 0.71575, loss: 0.84772
+Iteration 300:	accuracy=0.70000, loss=0.86414, regularization loss= 0.04760929372624637
+Validation accuracy: 0.67725, loss: 1.02614
+Iteration 400:	accuracy=0.56667, loss=1.09188, regularization loss= 0.047217153027193266
+Validation accuracy: 0.69517, loss: 0.89132
+Iteration 500:	accuracy=0.80000, loss=0.76418, regularization loss= 0.06032709938373698
+Test accuracy=0.74910, loss=0.79160
+Validation accuracy: 0.74842, loss: 0.78370
+Iteration 600:	accuracy=0.80000, loss=0.65367, regularization loss= 0.05752137141049369
+Validation accuracy: 0.70867, loss: 0.93868
+Iteration 700:	accuracy=0.80000, loss=0.66310, regularization loss= 0.05035930428183589
+Validation accuracy: 0.67525, loss: 1.01610
+Iteration 800:	accuracy=0.73333, loss=0.75446, regularization loss= 0.04692606939121045
+Test accuracy=0.74500, loss=0.83317
+Validation accuracy: 0.75317, loss: 0.84184
+Iteration 900:	accuracy=0.76667, loss=0.78753, regularization loss= 0.04913583978137451
+Validation accuracy: 0.76258, loss: 0.73549
+Iteration 1000:	accuracy=0.90000, loss=0.42376, regularization loss= 0.05007358127576435
+Validation accuracy: 0.83567, loss: 0.53591
+Iteration 1100:	accuracy=0.80000, loss=0.67582, regularization loss= 0.03358499642914821
+Test accuracy=0.82320, loss=0.52936
+Validation accuracy: 0.83008, loss: 0.53189
+Iteration 1200:	accuracy=0.86667, loss=0.34392, regularization loss= 0.03338925115793336
+Validation accuracy: 0.85867, loss: 0.47215
+Iteration 1300:	accuracy=0.86667, loss=0.53032, regularization loss= 0.03380768441804182
+Validation accuracy: 0.80908, loss: 0.62410
+Iteration 1400:	accuracy=0.73333, loss=0.88796, regularization loss= 0.03447974632892434
+Test accuracy=0.85890, loss=0.47847
+Validation accuracy: 0.86367, loss: 0.48224
+Iteration 1500:	accuracy=0.76667, loss=0.36684, regularization loss= 0.03502458572614516
+Epoch 1: 
+Test accuracy=0.88360, loss=0.38989
+Validation accuracy: 0.88600, loss: 0.38295
+Iteration 0:	accuracy=0.93333, loss=0.27179, regularization loss= 0.03556883529476457
+Validation accuracy: 0.86892, loss: 0.42753
+Iteration 100:	accuracy=0.86667, loss=0.46303, regularization loss= 0.036594178444966645
+Validation accuracy: 0.88633, loss: 0.37325
+Iteration 200:	accuracy=0.80000, loss=0.49726, regularization loss= 0.037809383125557074
+Test accuracy=0.87070, loss=0.43465
+Validation accuracy: 0.86742, loss: 0.44171
+Iteration 300:	accuracy=0.90000, loss=0.25347, regularization loss= 0.03926519190481703
+Validation accuracy: 0.89733, loss: 0.34161
+Iteration 400:	accuracy=0.83333, loss=0.29950, regularization loss= 0.04029422202574584
+Validation accuracy: 0.90242, loss: 0.31498
+Iteration 500:	accuracy=0.93333, loss=0.46144, regularization loss= 0.04043127373961942
+Test accuracy=0.90550, loss=0.31126
+Validation accuracy: 0.90625, loss: 0.30370
+Iteration 600:	accuracy=0.90000, loss=0.26672, regularization loss= 0.04095590661628099
+Validation accuracy: 0.90583, loss: 0.31266
+Iteration 700:	accuracy=0.90000, loss=0.28558, regularization loss= 0.0410743016717501
+Validation accuracy: 0.89833, loss: 0.34832
+Iteration 800:	accuracy=0.86667, loss=0.24720, regularization loss= 0.041437681955690496
+Test accuracy=0.91610, loss=0.29238
+Validation accuracy: 0.91425, loss: 0.28816
+Iteration 900:	accuracy=0.83333, loss=0.40230, regularization loss= 0.04170566862922389
+Validation accuracy: 0.91117, loss: 0.29751
+Iteration 1000:	accuracy=0.93333, loss=0.59547, regularization loss= 0.042046001803607146
+Validation accuracy: 0.90967, loss: 0.30237
+Iteration 1100:	accuracy=0.93333, loss=0.17752, regularization loss= 0.04253029836741135
+Test accuracy=0.91360, loss=0.29449
+Validation accuracy: 0.91367, loss: 0.28771
+Iteration 1200:	accuracy=0.96667, loss=0.19884, regularization loss= 0.042785308580394
+Validation accuracy: 0.91342, loss: 0.30401
+Iteration 1300:	accuracy=0.96667, loss=0.15347, regularization loss= 0.04306964078714564
+Validation accuracy: 0.91267, loss: 0.29789
+Iteration 1400:	accuracy=1.00000, loss=0.02740, regularization loss= 0.04315949498784981
+Test accuracy=0.92230, loss=0.27149
+Validation accuracy: 0.92083, loss: 0.26691
+Iteration 1500:	accuracy=0.93333, loss=0.19517, regularization loss= 0.04342309713102317
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Validation loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Validation accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} [<matplotlib.lines.Line2D at 0x7f08077e2e48>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Change of learning rate}\label{change-of-learning-rate}
+
+If we change the initial learning rate from 0.001 to 0.1, the training
+process becomes unstable and the loss is out of control. Thus, you need
+to be careful when setting the initial learning rate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{model} \PY{o}{=} \PY{n}{MNISTNet}\PY{p}{(}\PY{p}{)}
+         \PY{n}{loss} \PY{o}{=} \PY{n}{SoftmaxCrossEntropy}\PY{p}{(}\PY{n}{num\PYZus{}class}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} define your learning rate sheduler}
+         \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{n}{iteration}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{iteration} \PY{o}{\PYZpc{}} \PY{l+m+mi}{1000} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{lr}\PY{o}{*}\PY{l+m+mf}{0.5}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{lr}
+         
+         \PY{n}{adam} \PY{o}{=} \PY{n}{Adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{decay}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}  \PY{n}{sheduler\PYZus{}func} \PY{o}{=} \PY{n}{func}\PY{p}{)}
+         \PY{n}{l2} \PY{o}{=} \PY{n}{L2}\PY{p}{(}\PY{n}{w}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)} \PY{c+c1}{\PYZsh{} L2 regularization with lambda=0.001}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{adam}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{n}{loss}\PY{p}{,} \PY{n}{regularization}\PY{o}{=}\PY{n}{l2}\PY{p}{)}
+         \PY{n}{train\PYZus{}results}\PY{p}{,} \PY{n}{val\PYZus{}results}\PY{p}{,} \PY{n}{test\PYZus{}results} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}
+             \PY{n}{mnist}\PY{p}{,} 
+             \PY{n}{train\PYZus{}batch}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{val\PYZus{}batch}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{test\PYZus{}batch}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} 
+             \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} 
+             \PY{n}{val\PYZus{}intervals}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{test\PYZus{}intervals}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{print\PYZus{}intervals}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 0: 
+Test accuracy=0.09040, loss=2.30259
+Validation accuracy: 0.09850, loss: 2.30259
+Iteration 0:	accuracy=0.16667, loss=2.30259, regularization loss= 0.005212815460199879
+Validation accuracy: 0.60192, loss: 1.36148
+Iteration 100:	accuracy=0.60000, loss=1.32383, regularization loss= 0.3158125830973321
+Validation accuracy: 0.58192, loss: 2.19570
+Iteration 200:	accuracy=0.70000, loss=1.12469, regularization loss= 0.48396360224237345
+Test accuracy=0.48930, loss=7.26545
+Validation accuracy: 0.49725, loss: 6.90743
+Iteration 300:	accuracy=0.46667, loss=7.91728, regularization loss= 0.9180977023590724
+Validation accuracy: 0.47983, loss: 15.22511
+Iteration 400:	accuracy=0.36667, loss=16.29151, regularization loss= 2.129209698521958
+Validation accuracy: 0.54642, loss: 7.41058
+Iteration 500:	accuracy=0.40000, loss=10.95386, regularization loss= 3.1761807625406595
+Test accuracy=0.36740, loss=10.91698
+Validation accuracy: 0.36850, loss: 10.74736
+Iteration 600:	accuracy=0.30000, loss=9.56630, regularization loss= 4.109611084464017
+Validation accuracy: 0.36675, loss: 10.55818
+Iteration 700:	accuracy=0.50000, loss=7.08085, regularization loss= 4.186017132482088
+Validation accuracy: 0.38883, loss: 4.52645
+Iteration 800:	accuracy=0.56667, loss=3.89148, regularization loss= 5.774158891895546
+Test accuracy=0.30870, loss=2.45384
+Validation accuracy: 0.30700, loss: 2.58460
+Iteration 900:	accuracy=0.23333, loss=2.41846, regularization loss= 7.2542336095567705
+Validation accuracy: 0.24800, loss: 2.76055
+Iteration 1000:	accuracy=0.26667, loss=2.31911, regularization loss= 7.500158186975829
+Validation accuracy: 0.35092, loss: 2.02720
+Iteration 1100:	accuracy=0.36667, loss=1.74690, regularization loss= 5.418911497329971
+Test accuracy=0.37970, loss=2.19015
+Validation accuracy: 0.37817, loss: 2.16324
+Iteration 1200:	accuracy=0.40000, loss=1.88189, regularization loss= 4.751865255555399
+Validation accuracy: 0.32933, loss: 2.29982
+Iteration 1300:	accuracy=0.16667, loss=2.94359, regularization loss= 4.6936209938196045
+Validation accuracy: 0.41833, loss: 2.38247
+Iteration 1400:	accuracy=0.46667, loss=2.11959, regularization loss= 4.641843185246907
+Test accuracy=0.36190, loss=2.34294
+Validation accuracy: 0.35800, loss: 2.43842
+Iteration 1500:	accuracy=0.23333, loss=2.54566, regularization loss= 4.514996825108424
+Epoch 1: 
+Test accuracy=0.35540, loss=3.93225
+Validation accuracy: 0.34400, loss: 4.22218
+Iteration 0:	accuracy=0.26667, loss=4.55969, regularization loss= 4.6941092122399315
+Validation accuracy: 0.41558, loss: 3.15016
+Iteration 100:	accuracy=0.30000, loss=3.25757, regularization loss= 4.96978475146627
+Validation accuracy: 0.34508, loss: 2.09704
+Iteration 200:	accuracy=0.50000, loss=1.74439, regularization loss= 5.342696263901063
+Test accuracy=0.37820, loss=2.78332
+Validation accuracy: 0.37908, loss: 2.69979
+Iteration 300:	accuracy=0.30000, loss=2.04807, regularization loss= 5.516101926983693
+Validation accuracy: 0.37917, loss: 2.57896
+Iteration 400:	accuracy=0.33333, loss=1.85732, regularization loss= 6.087318804967881
+Validation accuracy: 0.34983, loss: 1.98947
+Iteration 500:	accuracy=0.40000, loss=1.50551, regularization loss= 3.052576220928409
+Test accuracy=0.41980, loss=2.31006
+Validation accuracy: 0.41375, loss: 2.19342
+Iteration 600:	accuracy=0.36667, loss=2.24940, regularization loss= 1.8357222121206758
+Validation accuracy: 0.38558, loss: 3.87686
+Iteration 700:	accuracy=0.33333, loss=4.36138, regularization loss= 1.4356603957792482
+Validation accuracy: 0.41200, loss: 6.31662
+Iteration 800:	accuracy=0.20000, loss=8.74972, regularization loss= 1.3643956817511314
+Test accuracy=0.37210, loss=4.32443
+Validation accuracy: 0.38167, loss: 4.24413
+Iteration 900:	accuracy=0.43333, loss=3.24708, regularization loss= 1.3705888130684114
+Validation accuracy: 0.29208, loss: 7.02236
+Iteration 1000:	accuracy=0.36667, loss=6.02999, regularization loss= 1.386764535933595
+Validation accuracy: 0.31242, loss: 5.91398
+Iteration 1100:	accuracy=0.36667, loss=4.07254, regularization loss= 1.4312016528710743
+Test accuracy=0.45210, loss=3.64708
+Validation accuracy: 0.44483, loss: 3.62134
+Iteration 1200:	accuracy=0.56667, loss=2.94765, regularization loss= 1.5000725696762864
+Validation accuracy: 0.43458, loss: 5.11615
+Iteration 1300:	accuracy=0.36667, loss=6.40507, regularization loss= 1.540135570782486
+Validation accuracy: 0.34708, loss: 8.79349
+Iteration 1400:	accuracy=0.26667, loss=10.81153, regularization loss= 1.6425053447776141
+Test accuracy=0.51640, loss=2.91002
+Validation accuracy: 0.52975, loss: 2.90536
+Iteration 1500:	accuracy=0.76667, loss=1.13222, regularization loss= 1.5586740572554882
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Validation loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Validation accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{val\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Testing accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{test\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} [<matplotlib.lines.Line2D at 0x7f0805dc3940>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Train your best MNISTNet!}\label{train-your-best-mnistnet}
+
+Tweak the hyperparameters of the above MNISTNet and use what you've
+learnt to train the best net.
+
+Credits will be given based on your test accuracy, your
+explanations/insights of the training. The network is small, hence the
+training should finish quickly using your CPU (less than 1 hour).
+
+Please report the following: - Training validation and testing loss as
+well as accuracy over iterations - Architecture and training method (eg.
+optimization scheme, data augmentation): explain your design choices,
+what has failed and what has worked and why you think they worked/failed
+- Try different hyper-parameters, e.g. rate decaying, weight decay,
+number of layers and total number of epochs.
+
+Do NOT use external libraries like Tensorflow, keras and Pytorch in your
+implementation, i.e. optimizer.py, layer.py and loss.py. Do NOT copy the
+code from the internet, e.g. github. You should also give credits to any
+material that you refer to for your implementation.
+
+    \section{Final submission
+instructions}\label{final-submission-instructions}
+
+Please submit the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Your code files in a folder \texttt{codes}
+\item
+  A short report (1-2 pages) in pdf titled \texttt{report.pdf},
+  explaining the logic (expressed using mathematical formulation) of
+  your implementation (including the forward and backward function like
+  ReLU) and the findings from training your best net
+\end{enumerate}
+
+\textbf{ASSIGNMENT DEADLINE: 4 MAR 2018 (SUN) 17:00PM}
+
+Do not include the \texttt{data} folder as it takes up substantial
+memory. Please zip up the following folders under a folder named with
+your NUSNET ID: eg. `e0123456g.zip' and submit the zipped folder to
+IVLE/workbin/assignment 1 submission.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
